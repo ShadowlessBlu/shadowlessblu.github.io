@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calvin Sewornu — Portfolio</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.8/index.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5.0.14/index.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/dm-mono@5.0.14/index.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+:root {
+  --bg:#0a0e14; --bg-card:#111720; --bg-card2:#16202e;
+  --accent:#00d4aa; --accent2:#0087ff;
+  --text:#e8edf5; --muted:#7a8ba0;
+  --border:rgba(0,212,170,0.15); --border2:rgba(255,255,255,0.07);
+  --font-serif:'Playfair Display',Georgia,serif;
+  --font-sans:'DM Sans',system-ui,sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --radius:12px; --admin-bg:#060a10;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.7}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(16px);background:rgba(10,14,20,.85);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:60px}
+.nav-logo{font-family:var(--font-serif);font-size:1.1rem;color:var(--accent);letter-spacing:.02em;cursor:pointer;user-select:none;transition:text-shadow .2s}
+.nav-logo.seq-pulse{animation:logoPulse .35s ease}
+@keyframes logoPulse{0%,100%{color:var(--accent)}50%{color:#fff;text-shadow:0 0 14px var(--accent)}}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;letter-spacing:.04em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+
+/* SECTIONS */
+section{padding:100px 5vw;max-width:1100px;margin:0 auto}
+.section-label{font-family:var(--font-mono);font-size:.75rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem;cursor:default}
+.section-title{font-family:var(--font-serif);font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.15;margin-bottom:3rem}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:60px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-mono{font-family:var(--font-mono);font-size:.8rem;color:var(--accent);letter-spacing:.1em;margin-bottom:1.5rem}
+.hero-name{font-family:var(--font-serif);font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;line-height:1.1;margin-bottom:1rem}
+.hero-name span{color:var(--accent)}
+.hero-tagline{font-size:1.1rem;color:var(--muted);max-width:480px;margin-bottom:2.5rem;line-height:1.8}
+.hero-links{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.4rem;border-radius:6px;font-size:.875rem;font-weight:500;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-family:var(--font-sans)}
+.btn-primary{background:var(--accent);color:#0a0e14}
+.btn-primary:hover{background:#00f0c0;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn-outline:hover{background:rgba(0,212,170,.1)}
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-ring{width:320px;height:320px;border-radius:50%;border:1px solid var(--border);position:relative;display:flex;align-items:center;justify-content:center}
+.hero-ring::before{content:'';position:absolute;inset:20px;border-radius:50%;border:1px dashed rgba(0,212,170,.2);animation:spin 20s linear infinite}
+.hero-ring::after{content:'';position:absolute;inset:50px;border-radius:50%;border:1px solid rgba(0,135,255,.2)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-icon{font-size:5rem;z-index:1}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.stat{background:var(--bg-card);border:1px solid var(--border2);border-radius:var(--radius);padding:1rem}
+.stat-num{font-family:var(--font-serif);font-size:1.8rem;color:var(--accent);font-weight:700}
+.stat-label{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+
+/* CV DOWNLOAD PILLS */
+.cv-downloads{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.25rem}
+.cv-dl-pill{display:inline-flex;align-items:center;gap:.45rem;background:rgba(0,135,255,.1);border:1px solid rgba(0,135,255,.3);color:var(--accent2);padding:.4rem 1rem;border-radius:20px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none}
+.cv-dl-pill:hover{background:rgba(0,135,255,.22);transform:translateY(-1px)}
+
+/* ABOUT */
+#about{border-top:1px solid var(--border2)}
+.about-grid{display:grid;grid-template-columns:3fr 2fr;gap:4rem;align-items:start}
+.about-text{font-size:1.05rem;color:var(--muted);line-height:1.9}
+.about-info{background:var(--bg-card);border:1px solid var(--border2);border-radius:var(--radius);padding:1.5rem}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--border2);font-size:.9rem}
+.info-row:last-child{border-bottom:none}
+.info-label{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+.info-val{color:var(--text);font-weight:500}
+.info-val a{color:var(--accent);text-decoration:none}
+
+/* RESEARCH */
+#research{border-top:1px solid var(--border2)}
+.timeline{position:relative}
+.timeline::before{content:'';position:absolute;left:16px;top:0;bottom:0;width:1px;background:var(--border)}
+.timeline-item{position:relative;padding:0 0 3rem 3rem}
+.timeline-dot{position:absolute;left:9px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.timeline-period{font-family:var(--font-mono);font-size:.75rem;color:var(--accent);margin-bottom:.3rem}
+.timeline-title{font-family:var(--font-serif);font-size:1.15rem;font-weight:700;margin-bottom:.2rem}
+.timeline-org{font-size:.9rem;color:var(--muted);margin-bottom:.8rem}
+.timeline-focus{font-size:.8rem;font-family:var(--font-mono);color:var(--accent2);margin-bottom:.8rem}
+.timeline-bullets{list-style:none}
+.timeline-bullets li{position:relative;padding-left:1.2rem;font-size:.9rem;color:var(--muted);margin-bottom:.4rem;line-height:1.6}
+.timeline-bullets li::before{content:'›';position:absolute;left:0;color:var(--accent)}
+
+/* PROJECTS */
+#projects{border-top:1px solid var(--border2)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.project-card{background:var(--bg-card);border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;transition:border-color .2s,transform .2s;display:flex;flex-direction:column}
+.project-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.project-img-wrap{width:100%;height:180px;overflow:hidden;background:#0d1520;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.project-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.project-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:rgba(0,212,170,.2)}
+.project-body{padding:1.25rem 1.5rem 1.5rem;flex:1}
+.project-name{font-family:var(--font-serif);font-size:1.05rem;font-weight:700;margin-bottom:.8rem;color:var(--text)}
+.project-bullets{list-style:none}
+.project-bullets li{position:relative;padding-left:1.2rem;font-size:.875rem;color:var(--muted);margin-bottom:.35rem;line-height:1.6}
+.project-bullets li::before{content:'→';position:absolute;left:0;color:var(--accent2);font-size:.8rem}
+
+/* SKILLS */
+#skills{border-top:1px solid var(--border2)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5rem}
+.skill-cat{background:var(--bg-card);border:1px solid var(--border2);border-radius:var(--radius);padding:1.25rem}
+.skill-cat-name{font-family:var(--font-mono);font-size:.75rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border2)}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.skill-tag{background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);color:var(--text);font-size:.8rem;padding:.25rem .6rem;border-radius:4px}
+
+/* ACHIEVEMENTS */
+#achievements{border-top:1px solid var(--border2)}
+.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.ach-card{background:var(--bg-card);border:1px solid var(--border2);border-radius:var(--radius);padding:1.5rem;border-left:3px solid var(--accent)}
+.ach-title{font-weight:600;margin-bottom:.4rem}
+.ach-meta{font-size:.85rem;color:var(--muted)}
+
+/* PRESENTATIONS */
+.pres-item{background:var(--bg-card);border:1px solid var(--border2);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1rem;display:flex;gap:1.5rem;align-items:flex-start}
+.pres-year{font-family:var(--font-mono);font-size:.8rem;color:var(--accent);min-width:50px;margin-top:.2rem}
+.pres-title{font-weight:600;margin-bottom:.2rem}
+.pres-venue{font-size:.875rem;color:var(--muted)}
+.pres-desc{font-size:.85rem;color:var(--muted);margin-top:.3rem}
+
+/* CONTACT */
+#contact{border-top:1px solid var(--border2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.contact-info .info-row{padding:.8rem 0}
+.ref-card{background:var(--bg-card);border:1px solid var(--border2);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem}
+.ref-name{font-weight:600;margin-bottom:.2rem}
+.ref-title{font-size:.85rem;color:var(--muted);margin-bottom:.5rem}
+.ref-contact{font-size:.8rem;color:var(--muted)}
+.ref-contact a{color:var(--accent);text-decoration:none}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem 5vw 4rem;border-top:1px solid var(--border2);color:var(--muted);font-size:.85rem}
+
+/* SEQUENCE HINT */
+.seq-hint{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:rgba(0,212,170,.12);border:1px solid rgba(0,212,170,.3);color:var(--accent);padding:.45rem 1.1rem;border-radius:20px;font-size:.78rem;font-family:var(--font-mono);letter-spacing:.05em;pointer-events:none;opacity:0;transition:opacity .4s;z-index:999}
+.seq-hint.show{opacity:1}
+
+/* ══════════════ ADMIN OVERLAY ══════════════ */
+#admin-overlay{display:none;position:fixed;inset:0;z-index:1000;background:var(--admin-bg);overflow-y:auto}
+#admin-overlay.visible{display:block}
+.admin-nav{position:sticky;top:0;z-index:10;background:#0c1320;border-bottom:1px solid rgba(0,212,170,.2);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px}
+.admin-nav-title{font-family:var(--font-mono);font-size:.85rem;color:var(--accent)}
+.admin-nav-actions{display:flex;gap:.75rem}
+.admin-btn{padding:.4rem 1rem;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-family:var(--font-sans)}
+.admin-btn-save{background:var(--accent);color:#0a0e14}
+.admin-btn-save:hover{background:#00f0c0}
+.admin-btn-close{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,.15)}
+.admin-btn-close:hover{border-color:var(--text);color:var(--text)}
+.admin-body{max-width:900px;margin:0 auto;padding:2rem}
+.admin-section{margin-bottom:3rem}
+.admin-section-title{font-family:var(--font-mono);font-size:.75rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:1px solid rgba(0,212,170,.2)}
+.admin-row{margin-bottom:1rem}
+.admin-label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:.3rem}
+.admin-input,.admin-textarea{width:100%;background:#111720;border:1px solid rgba(255,255,255,.1);color:var(--text);padding:.6rem .75rem;border-radius:6px;font-family:var(--font-sans);font-size:.9rem;outline:none;transition:border-color .2s}
+.admin-input:focus,.admin-textarea:focus{border-color:var(--accent)}
+.admin-textarea{resize:vertical;min-height:90px;line-height:1.6}
+.admin-card{background:#111720;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:1rem;margin-bottom:.75rem;position:relative}
+.admin-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}
+.admin-card-label{font-size:.8rem;font-weight:600;color:var(--text)}
+.admin-delete-btn{background:rgba(220,50,50,.15);border:1px solid rgba(220,50,50,.3);color:#e25555;font-size:.75rem;padding:.2rem .6rem;border-radius:4px;cursor:pointer;font-family:var(--font-sans)}
+.admin-delete-btn:hover{background:rgba(220,50,50,.3)}
+.admin-add-btn{background:rgba(0,212,170,.1);border:1px dashed rgba(0,212,170,.4);color:var(--accent);font-size:.85rem;padding:.5rem 1rem;border-radius:6px;cursor:pointer;width:100%;margin-top:.5rem;transition:all .2s;font-family:var(--font-sans)}
+.admin-add-btn:hover{background:rgba(0,212,170,.2)}
+.admin-two-col{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.admin-three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+.bullet-row{display:flex;gap:.5rem;margin-bottom:.5rem;align-items:flex-start}
+.bullet-row input{flex:1}
+.bullet-del-btn{background:rgba(220,50,50,.15);border:1px solid rgba(220,50,50,.2);color:#e25555;font-size:.8rem;padding:.4rem .6rem;border-radius:4px;cursor:pointer;white-space:nowrap;margin-top:2px;font-family:var(--font-sans)}
+.bullet-add-btn{background:transparent;border:1px dashed rgba(255,255,255,.15);color:var(--muted);font-size:.8rem;padding:.35rem .75rem;border-radius:4px;cursor:pointer;margin-top:.3rem;font-family:var(--font-sans)}
+.bullet-add-btn:hover{border-color:var(--accent);color:var(--accent)}
+.admin-tab-bar{display:flex;flex-wrap:wrap;gap:.15rem;margin-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.admin-tab{padding:.5rem 1rem;font-size:.8rem;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--font-sans)}
+.admin-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.admin-tab-panel{display:none}
+.admin-tab-panel.active{display:block}
+
+/* Admin image upload */
+.img-upload-zone{border:2px dashed rgba(0,212,170,.3);border-radius:8px;padding:.85rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;background:transparent}
+.img-upload-zone:hover{border-color:var(--accent);background:rgba(0,212,170,.04)}
+.img-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.img-upload-zone .upload-label{font-size:.78rem;color:var(--muted);pointer-events:none}
+.img-preview-wrap{position:relative;margin-top:.5rem}
+.img-preview-wrap img{width:100%;max-height:130px;object-fit:cover;border-radius:6px;display:block}
+.img-remove-btn{background:rgba(220,50,50,.2);border:1px solid rgba(220,50,50,.4);color:#e25555;font-size:.72rem;padding:.2rem .6rem;border-radius:4px;cursor:pointer;margin-top:.35rem;font-family:var(--font-sans)}
+
+/* Admin CV upload */
+.cv-admin-item{background:#111720;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.85rem 1rem;margin-bottom:.6rem;display:flex;align-items:center;gap:1rem}
+.cv-admin-item .cv-icon{font-size:1.4rem;flex-shrink:0}
+.cv-admin-item .cv-info{flex:1;min-width:0}
+.cv-admin-item .cv-name-input{width:100%;background:#0a0e14;border:1px solid rgba(255,255,255,.08);color:var(--text);padding:.35rem .6rem;border-radius:5px;font-family:var(--font-sans);font-size:.85rem;outline:none}
+.cv-admin-item .cv-name-input:focus{border-color:var(--accent)}
+.cv-admin-item .cv-file-meta{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+.cv-upload-zone{border:2px dashed rgba(0,135,255,.35);border-radius:8px;padding:1.5rem;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.cv-upload-zone:hover{border-color:var(--accent2);background:rgba(0,135,255,.05)}
+.cv-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+
+/* Login */
+#admin-login{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1.5rem}
+.login-box{background:#111720;border:1px solid rgba(0,212,170,.2);border-radius:var(--radius);padding:2.5rem;width:340px;text-align:center}
+.login-title{font-family:var(--font-serif);font-size:1.5rem;margin-bottom:.5rem}
+.login-sub{font-size:.85rem;color:var(--muted);margin-bottom:2rem}
+.login-error{color:#e25555;font-size:.8rem;margin-top:.5rem;display:none}
+#admin-panel{display:none}
+#admin-panel.visible{display:block}
+
+/* Toast */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--accent);color:#0a0e14;padding:.75rem 1.5rem;border-radius:8px;font-size:.875rem;font-weight:600;z-index:9999;transform:translateY(100px);transition:transform .3s}
+.toast.show{transform:translateY(0)}
+
+/* CV print */
+#cv-print{display:none;font-family:'Times New Roman',Times,serif;font-size:10pt;line-height:1.35;color:#000;background:#fff;padding:36pt 43.2pt;width:816px;box-sizing:border-box}
+#cv-print h1.cv-name{text-align:center;font-size:14pt;font-weight:bold;text-transform:uppercase;letter-spacing:.05em;margin:0 0 4pt}
+#cv-print .cv-contact{text-align:center;font-size:10pt;margin:0 0 10pt}
+#cv-print .cv-section-head{font-size:10pt;font-weight:bold;text-transform:uppercase;letter-spacing:.06em;border-bottom:1pt solid #000;padding-bottom:2pt;margin:10pt 0 4pt}
+#cv-print .cv-entry-row{display:flex;justify-content:space-between;align-items:baseline;margin:4pt 0 0}
+#cv-print .cv-entry-title{font-weight:bold;font-size:10pt}
+#cv-print .cv-entry-date{font-size:10pt;font-style:italic;white-space:nowrap;margin-left:8pt}
+#cv-print .cv-entry-sub{font-style:italic;font-size:10pt;margin:0}
+#cv-print .cv-focus{font-size:10pt;margin:2pt 0}
+#cv-print .cv-focus strong{font-weight:bold}
+#cv-print ul.cv-bullets{margin:3pt 0 0 0;padding-left:18pt;list-style-type:disc}
+#cv-print ul.cv-bullets li{margin-bottom:1.5pt;font-size:10pt}
+#cv-print .cv-body-para{font-size:10pt;margin:3pt 0}
+#cv-print .cv-skill-row{font-size:10pt;margin:2pt 0}
+#cv-print .cv-skill-row strong{font-weight:bold}
+#cv-print .cv-ach-row{display:flex;justify-content:space-between;align-items:baseline;margin:3pt 0 0}
+#cv-print .cv-service-item{font-size:10pt;margin:2pt 0}
+#cv-print .cv-refs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 20pt;margin-top:4pt}
+#cv-print .cv-ref-block{font-size:10pt}
+#cv-print .cv-ref-name{font-weight:bold}
+#cv-print .cv-pres-item{margin:3pt 0 0 18pt;font-size:10pt}
+#cv-print .cv-pres-venue{font-weight:bold}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .ach-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .admin-two-col,.admin-three-col{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" id="nav-logo" onclick="seqClick('logo')">CS</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-mono" id="hero-mono">// telecommunications engineer</div>
+      <h1 class="hero-name" id="hero-name">Loading...</h1>
+      <p class="hero-tagline" id="hero-tagline">Loading...</p>
+      <div class="hero-links">
+        <a href="#research" class="btn btn-primary">View Research</a>
+        <button class="btn btn-outline" onclick="downloadAutoCV()" id="dl-cv-btn">⬇ Auto CV PDF</button>
+        <a id="hero-linkedin" href="#" class="btn btn-outline" target="_blank">LinkedIn ↗</a>
+        <a id="hero-email-btn" href="#" class="btn btn-outline">Email</a>
+      </div>
+      <div class="cv-downloads" id="cv-downloads-hero"></div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num" id="stat-years">3+</div><div class="stat-label">Years Research Experience</div></div>
+        <div class="stat"><div class="stat-num" id="stat-projects">6+</div><div class="stat-label">Projects Completed</div></div>
+        <div class="stat"><div class="stat-num" id="stat-papers">1</div><div class="stat-label" onclick="seqClick('papers')" style="cursor:default">IEEE Presentation</div></div>
+        <div class="stat"><div class="stat-num" id="stat-awards">2</div><div class="stat-label">Awards & Honours</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-ring"><span class="hero-icon">📡</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label" onclick="seqClick('about')">01 — About</div>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="about-grid">
+    <div>
+      <p class="about-text" id="about-text">Loading...</p>
+      <br>
+      <div class="section-label">Education</div>
+      <div id="education-block" style="margin-top:1rem;"></div>
+    </div>
+    <div class="about-info" id="about-info-block"></div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-label">02 — Research & Experience</div>
+  <h2 class="section-title">Research Background</h2>
+  <div class="timeline" id="research-timeline"></div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">03 — Projects</div>
+  <h2 class="section-title">Selected Projects</h2>
+  <div class="projects-grid" id="projects-grid"></div>
+  <div style="margin-top:3rem;">
+    <div class="section-label" style="margin-bottom:1rem;">Presentations</div>
+    <div id="presentations-list"></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label" onclick="seqClick('skills')">04 — Skills</div>
+  <h2 class="section-title">Technical Expertise</h2>
+  <div class="skills-grid" id="skills-grid"></div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">05 — Achievements</div>
+  <h2 class="section-title">Awards & Service</h2>
+  <div class="ach-grid" id="ach-grid"></div>
+  <div style="margin-top:2.5rem;">
+    <div class="section-label" style="margin-bottom:1rem;">Academic & Professional Service</div>
+    <div id="service-list"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">06 — Contact</div>
+  <h2 class="section-title">Get in Touch</h2>
+  <div class="contact-grid">
+    <div class="contact-info"><div id="contact-info-block"></div></div>
+    <div class="contact-refs">
+      <div class="section-label" style="margin-bottom:1rem;">References</div>
+      <div id="refs-block"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div id="footer-text">© 2025 Calvin Sewornu. All rights reserved.</div>
+  <div style="margin-top:.4rem;font-size:.72rem;opacity:.3;">Built with care</div>
+</footer>
+
+<!-- SEQUENCE HINT -->
+<div class="seq-hint" id="seq-hint"></div>
+
+<!-- ADMIN OVERLAY -->
+<div id="admin-overlay">
+  <!-- LOGIN -->
+  <div id="admin-login">
+    <div class="login-box">
+      <h2 class="login-title">Admin Panel</h2>
+      <p class="login-sub">Enter your password to edit portfolio content</p>
+      <input class="admin-input" type="password" id="admin-pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')adminLogin()">
+      <div style="margin-top:1rem;">
+        <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="adminLogin()">Sign In</button>
+      </div>
+      <p class="login-error" id="login-error">Incorrect password</p>
+      <p style="margin-top:1.5rem;font-size:.75rem;color:var(--muted);">Hint: default is <code style="color:var(--accent);">calvin2025</code></p>
+    </div>
+    <button class="admin-btn admin-btn-close" onclick="closeAdmin()">← Back to Portfolio</button>
+  </div>
+
+  <!-- PANEL -->
+  <div id="admin-panel">
+    <div class="admin-nav">
+      <div class="admin-nav-title">⚙ Portfolio Admin</div>
+      <div class="admin-nav-actions">
+        <button class="admin-btn admin-btn-save" onclick="saveAll()">💾 Save Changes</button>
+        <button class="admin-btn admin-btn-close" onclick="closeAdmin()">✕ Close</button>
+      </div>
+    </div>
+    <div class="admin-body">
+      <div class="admin-tab-bar">
+        <button class="admin-tab active" onclick="switchTab('profile',this)">Profile</button>
+        <button class="admin-tab" onclick="switchTab('cvs',this)">📄 CVs</button>
+        <button class="admin-tab" onclick="switchTab('research',this)">Research</button>
+        <button class="admin-tab" onclick="switchTab('projects',this)">Projects</button>
+        <button class="admin-tab" onclick="switchTab('skills',this)">Skills</button>
+        <button class="admin-tab" onclick="switchTab('achievements',this)">Achievements</button>
+        <button class="admin-tab" onclick="switchTab('contact',this)">Contact</button>
+        <button class="admin-tab" onclick="switchTab('settings',this)">Settings</button>
+      </div>
+
+      <!-- PROFILE -->
+      <div id="tab-profile" class="admin-tab-panel active">
+        <div class="admin-section">
+          <div class="admin-section-title">Hero & Profile</div>
+          <div class="admin-two-col">
+            <div class="admin-row"><label class="admin-label">Full Name (use newline for two-line display)</label><input class="admin-input" id="a-name" type="text"></div>
+            <div class="admin-row"><label class="admin-label">Hero subtitle line</label><input class="admin-input" id="a-hero-mono" type="text"></div>
+          </div>
+          <div class="admin-row"><label class="admin-label">Tagline</label><input class="admin-input" id="a-tagline" type="text"></div>
+          <div class="admin-row"><label class="admin-label">Hero Stats — four values, comma-separated (years, projects, papers, awards)</label><input class="admin-input" id="a-stats" type="text" placeholder="3+, 6+, 1, 2"></div>
+          <div class="admin-row"><label class="admin-label">About / Bio</label><textarea class="admin-textarea" id="a-bio" rows="6"></textarea></div>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-title">Education</div>
+          <div id="a-education-list"></div>
+          <button class="admin-add-btn" onclick="addEducation()">+ Add Education Entry</button>
+        </div>
+      </div>
+
+      <!-- CVs -->
+      <div id="tab-cvs" class="admin-tab-panel">
+        <div class="admin-section">
+          <div class="admin-section-title">Your CV Files</div>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.25rem;">Upload your CV PDFs (or Word docs). Each file will appear as a download button on the public portfolio so visitors can grab whichever version suits them. You can rename each one with a friendly label below.</p>
+          <div id="a-cvs-list"></div>
+          <div class="cv-upload-zone" style="margin-top:.75rem;">
+            <input type="file" accept=".pdf,.doc,.docx" multiple id="cv-file-input" onchange="handleCvUpload(this)">
+            <div style="font-size:1.6rem;margin-bottom:.4rem;">📄</div>
+            <div style="font-size:.9rem;font-weight:600;color:var(--text);">Click to upload CV files</div>
+            <div style="font-size:.78rem;color:var(--muted);margin-top:.25rem;">PDF, DOC or DOCX · You can upload multiple files at once</div>
+          </div>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-title">About Auto-Generated CV</div>
+          <p style="font-size:.85rem;color:var(--muted);line-height:1.7;">The <strong style="color:var(--text);">Auto CV PDF</strong> button in the hero is always available — it generates a clean PDF directly from all your current portfolio data using your exact CV style (Times New Roman, section headers with border rules, right-aligned dates). This updates automatically whenever you save changes.</p>
+        </div>
+      </div>
+
+      <!-- RESEARCH -->
+      <div id="tab-research" class="admin-tab-panel">
+        <div class="admin-section">
+          <div class="admin-section-title">Research & Experience Items</div>
+          <div id="a-research-list"></div>
+          <button class="admin-add-btn" onclick="addResearch()">+ Add Research / Experience</button>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div id="tab-projects" class="admin-tab-panel">
+        <div class="admin-section">
+          <div class="admin-section-title">Projects</div>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.25rem;">Each project can have a cover image. Click the image area on any project card to upload one — images are stored in your browser alongside all other data.</p>
+          <div id="a-projects-list"></div>
+          <button class="admin-add-btn" onclick="addProject()">+ Add Project</button>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-title">Presentations</div>
+          <div id="a-pres-list"></div>
+          <button class="admin-add-btn" onclick="addPresentation()">+ Add Presentation</button>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div id="tab-skills" class="admin-tab-panel">
+        <div class="admin-section">
+          <div class="admin-section-title">Skill Categories</div>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.25rem;">Each category has a name and comma-separated skill tags.</p>
+          <div id="a-skills-list"></div>
+          <button class="admin-add-btn" onclick="addSkillCat()">+ Add Category</button>
+        </div>
+      </div>
+
+      <!-- ACHIEVEMENTS -->
+      <div id="tab-achievements" class="admin-tab-panel">
+        <div class="admin-section">
+          <div class="admin-section-title">Awards & Achievements</div>
+          <div id="a-ach-list"></div>
+          <button class="admin-add-btn" onclick="addAch()">+ Add Achievement</button>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-title">Academic & Professional Service</div>
+          <div id="a-service-list"></div>
+          <button class="admin-add-btn" onclick="addService()">+ Add Service Item</button>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div id="tab-contact" class="admin-tab-panel">
+        <div class="admin-section">
+          <div class="admin-section-title">Contact Details</div>
+          <div class="admin-two-col">
+            <div class="admin-row"><label class="admin-label">Email</label><input class="admin-input" id="a-email" type="text"></div>
+            <div class="admin-row"><label class="admin-label">Phone</label><input class="admin-input" id="a-phone" type="text"></div>
+          </div>
+          <div class="admin-two-col">
+            <div class="admin-row"><label class="admin-label">LinkedIn URL</label><input class="admin-input" id="a-linkedin" type="text"></div>
+            <div class="admin-row"><label class="admin-label">GitHub URL (optional)</label><input class="admin-input" id="a-github" type="text"></div>
+          </div>
+          <div class="admin-row"><label class="admin-label">Location</label><input class="admin-input" id="a-location" type="text"></div>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-title">Referees</div>
+          <div id="a-refs-list"></div>
+          <button class="admin-add-btn" onclick="addRef()">+ Add Referee</button>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="tab-settings" class="admin-tab-panel">
+        <div class="admin-section">
+          <div class="admin-section-title">Secret Sequence</div>
+          <p style="font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;">The admin panel is hidden from public view. To open it, click these four elements <strong style="color:var(--text);">in order</strong> within 8 seconds:</p>
+          <div style="background:#111720;border:1px solid rgba(0,212,170,.15);border-radius:8px;padding:1rem;font-family:var(--font-mono);font-size:.82rem;color:var(--accent);">
+            1. Nav logo (top-left "CS")&nbsp;&nbsp;→&nbsp;&nbsp;2. Section label "01 — About"&nbsp;&nbsp;→&nbsp;&nbsp;3. IEEE stat label&nbsp;&nbsp;→&nbsp;&nbsp;4. Section label "04 — Skills"
+          </div>
+          <p style="font-size:.8rem;color:var(--muted);margin-top:.75rem;">A subtle hint bar will appear at the bottom as you progress through the sequence.</p>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-title">Change Password</div>
+          <div class="admin-row"><label class="admin-label">Current Password</label><input class="admin-input" type="password" id="s-old-pw"></div>
+          <div class="admin-row"><label class="admin-label">New Password</label><input class="admin-input" type="password" id="s-new-pw"></div>
+          <div class="admin-row"><label class="admin-label">Confirm New Password</label><input class="admin-input" type="password" id="s-confirm-pw"></div>
+          <button class="admin-btn admin-btn-save" onclick="changePassword()">Update Password</button>
+          <p id="pw-msg" style="font-size:.8rem;margin-top:.5rem;display:none;"></p>
+        </div>
+        <div class="admin-section">
+          <div class="admin-section-title">Footer</div>
+          <div class="admin-row"><label class="admin-label">Footer Text</label><input class="admin-input" id="a-footer" type="text"></div>
+        </div>
+        <div class="admin-section" style="border-top:1px solid rgba(220,50,50,.2);padding-top:1.5rem;">
+          <div class="admin-section-title" style="color:#e25555;">Danger Zone</div>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem;">Reset all content to the original defaults. Uploaded images and CV files will also be cleared. This cannot be undone.</p>
+          <button class="admin-btn" style="background:rgba(220,50,50,.15);border:1px solid rgba(220,50,50,.4);color:#e25555;" onclick="if(confirm('Reset ALL data to defaults? This cannot be undone.')) { localStorage.removeItem('portfolio_data'); location.reload(); }">Reset to Defaults</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HIDDEN CV FOR PDF -->
+<div id="cv-print"></div>
+<div class="toast" id="toast">Changes saved!</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// DEFAULT DATA
+// ═══════════════════════════════════════════════════
+const DEFAULT_DATA = {
+  adminPassword: "calvin2025",
+  profile: {
+    name: "Sewornu Calvin\nKofi Mawulorm",
+    heroMono: "// telecommunications engineer & researcher",
+    tagline: "Telecommunications Engineering graduate specialising in antenna design, embedded sensing systems, and wireless communication architectures. Research Assistant at KNUST's AT Labs.",
+    statsYears:"3+", statsProjects:"6+", statsPapers:"1", statsAwards:"2",
+    bio: "A motivated and passionate Telecommunications Engineering graduate with research experience in embedded sensing systems, wearable assistive technologies, and low-power wireless communication architectures. My work focuses on the design and prototyping of intelligent sensor-driven systems, integrating embedded hardware, wireless networking, and edge computing for human-interactive and cyber-physical applications.\n\nI am particularly interested in intelligent sensing systems, embedded AI platforms, wireless sensor networks, and experimentally driven system design. I seek to contribute to research in smart sensing and autonomous embedded systems. I have experience in physical and theoretical research, research paper construction, and presenting at symposiums."
+  },
+  contact: {
+    email:"calvinsewornu123@gmail.com", phone:"+233 552 310 269",
+    linkedin:"https://www.linkedin.com/in/sewornu-calvin", github:"", location:"Kumasi, Ghana"
+  },
+  footer: "© 2025 Calvin Sewornu. All rights reserved.",
+  education: [{
+    institution:"Kwame Nkrumah University of Science and Technology (KNUST)",
+    degree:"BSc. Telecommunications Engineering", period:"2022 – 2025",
+    grade:"Second Class Honours (Upper Division)",
+    coursework:"Wireless Communication Systems, Antenna & RF Engineering, Digital Systems Design, Digital Signal Processing, IoT Architectures, Communication Networks, Microprocessors, Information Theory"
+  }],
+  research: [
+    { title:"Research Assistant", org:"Quantum Computing & Assistive Technology Lab, KNUST", period:"Oct 2025 – Present", focus:"Edge-AI wearable systems and intelligent sensing platforms", bullets:["Supporting hardware–software co-design for intelligent wearable systems, including sensor integration, embedded firmware development, and wireless communication architecture.","Assisting with experimental setup, data analysis, and documentation for ongoing lab research.","Data analysis and system integration using Python and embedded platforms."] },
+    { title:"Design and Optimization of a Circular Tri-Band CPW Antenna", org:"Undergraduate Research, KNUST", period:"Jan 2025 – Aug 2025", focus:"Antenna design & EM simulation", bullets:["Designed and optimized a compact tri-band CPW antenna for multiband wireless applications.","Performed parametric optimization and full-wave EM simulations to improve impedance matching and radiation characteristics.","Evaluated antenna performance across multiple frequency bands using ANSYS HFSS and CST Studio Suite."] },
+    { title:"Robotics Research Intern", org:"The Makersplace", period:"Sept 2023 – Nov 2023 · Oct 2024 – Nov 2024", focus:"Robotics, embedded systems & sensor integration", bullets:["Assisted in the instruction of robotics and embedded systems courses.","Integrated sensors for robotic platforms and supported hands-on project development.","Prepared documentation and demonstrations for robotics tutorials and competitions."] },
+    { title:"ALX Software Engineering", org:"African Leadership Experience", period:"Aug 2023 – Oct 2024", focus:"Back-end engineering & system architecture", bullets:["Completed a one-year intensive software engineering program with foundational training in programming, algorithms, data structures, and collaborative development.","Specialisation in back-end engineering: server-side development, databases, APIs, and scalable system architecture."] },
+    { title:"Certified Ethical Hacker Training", org:"Educ8africa", period:"May 2024 – Jan 2025", focus:"Cybersecurity & penetration testing", bullets:["Practical training in network security, vulnerability assessment, penetration testing methodologies, cryptography, and system defense.","Preparing for the Certified Ethical Hacker (CEH) certification."] }
+  ],
+  projects: [
+    { name:"ESP8266 IoT Smartwatch", image:"", bullets:["Developed an IoT smartwatch using ESP8266 and ESP-NOW for low-power wireless communication.","Designed an intuitive OLED user interface with button-based navigation.","Linked the device to a multi-node ESP network, enabling continuous monitoring and real-time visualization of sensor data."] },
+    { name:"Smart Braille Glove Assistive Wearable Device", image:"", bullets:["Developed a Braille sensing matrix using switch arrays to simulate tactile detection.","Embedded processing of detected patterns for symbol recognition.","Integration of machine learning models for Braille character classification."] },
+    { name:"CropTimize Wireless Agritech Network", image:"", bullets:["Designed distributed sensor nodes for environmental data acquisition using ESP32 and ESP8266.","Developed real-time data visualization and analytics pipelines.","Applied ML-assisted analysis for decision support in irrigation and pest control."] },
+    { name:"AgriTel Agricultural Monitoring System", image:"", bullets:["ESP32-based system with AHT20, BMP280, AS5600 sensors and DS1302 RTC.","SD logging and GSM SMS delivery for remote data access.","Agricultural insight engine with trend analysis, crop stress indexing, and alert categories."] }
+  ],
+  presentations: [
+    { event:"IEEE IMS SensAI Symposium", year:"2024", title:"CropTimize Wireless Agritech Network", description:"Sensor-based AI solutions for real-time monitoring and decision support in smart agriculture." }
+  ],
+  skills: [
+    { name:"Antenna & RF", items:["Antenna Design","CPW Antennas","Multiband Antennas","MIMO Concepts","RF Simulation","Impedance Matching"] },
+    { name:"Simulation & CAD Tools", items:["ANSYS HFSS","CST Studio Suite","KiCad","NI Multisim","SolidWorks"] },
+    { name:"Embedded & IoT Systems", items:["ESP32 / ESP8266","Arduino","Sensor Integration","PCB Design","Raspberry Pi"] },
+    { name:"Software & Data", items:["C/C++","MATLAB","Python","SQL","R","LaTeX","Embedded AI"] },
+    { name:"Research & Documentation", items:["Technical Writing","Research Paper Construction","IEEE Standards","Product Design Specifications"] }
+  ],
+  achievements: [
+    { title:"First Place – Trust and Safety Hackathon", period:"June 2023", org:"Ghana Internet Safety Foundation" },
+    { title:"Most Innovative Telecommunications Engineering Student", period:"August 2024", org:"Telesa – KNUST" }
+  ],
+  service: [
+    { text:"Digital And Sustainability Experience (July 2023) – Assisted in coordinating student mobility activities." },
+    { text:"TME Education Club (January 2023) – Led procurement of electronic components and supported student hardware projects." },
+    { text:"KNUST ARM Club (September 2023) – Member and instructor during IoT workshops." },
+    { text:"IEEE IMS SensAI Symposium (July 2024) – Presented CropTimize Wireless Agritech Network, showcasing sensor-based AI solutions for smart agriculture." }
+  ],
+  referees: [
+    { name:"Prof. Jerry-John Kponyo", title:"Associate Professor, Dept. of Telecommunication Engineering", org:"KNUST", phone:"+233 208 227 980", email:"jjkponyo@gmail.com" },
+    { name:"Dr. K.S. Obeng Kwakye", title:"Lecturer, Dept. of Telecommunication Engineering", org:"KNUST", phone:"+233 55 463 6015", email:"ksobengkwakye@knust.edu.gh" },
+    { name:"Dr. Justice Owusu Agyemang", title:"Lecturer, Dept. of Telecommunication Engineering", org:"KNUST", phone:"+233 20 573 7153", email:"justice.agyemang@knust.edu.gh" }
+  ],
+  cvFiles: []  // [{name, label, dataUrl, fileType, size}]
+};
+
+// ═══════════════════════════════════════════════════
+// DATA MANAGEMENT
+// ═══════════════════════════════════════════════════
+function loadData() {
+  try { const s = localStorage.getItem('portfolio_data'); if (s) return JSON.parse(s); } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+}
+function saveData(d) { localStorage.setItem('portfolio_data', JSON.stringify(d)); }
+let DATA = loadData();
+if (!DATA.cvFiles) DATA.cvFiles = [];
+
+// ═══════════════════════════════════════════════════
+// RENDER PORTFOLIO
+// ═══════════════════════════════════════════════════
+function renderPortfolio() {
+  const p = DATA.profile, c = DATA.contact;
+
+  // nav logo
+  const initials = (p.name||'CS').replace('\n',' ').split(' ').slice(0,2).map(w=>w[0]).join('');
+  document.getElementById('nav-logo').textContent = initials;
+
+  // hero
+  document.getElementById('hero-mono').textContent = p.heroMono||'';
+  const nameEl = document.getElementById('hero-name');
+  const parts = (p.name||'').split('\n');
+  nameEl.innerHTML = parts.length>1 ? `${parts[0]} <span>${parts[1]}</span>` : `<span>${p.name}</span>`;
+  document.getElementById('hero-tagline').textContent = p.tagline||'';
+  document.getElementById('hero-linkedin').href = c.linkedin||'#';
+  document.getElementById('hero-email-btn').href = 'mailto:'+(c.email||'');
+  document.getElementById('stat-years').textContent = p.statsYears||'';
+  document.getElementById('stat-projects').textContent = p.statsProjects||'';
+  document.getElementById('stat-papers').textContent = p.statsPapers||'';
+  document.getElementById('stat-awards').textContent = p.statsAwards||'';
+
+  // CV download pills
+  renderCvPills();
+
+  // about
+  document.getElementById('about-text').textContent = p.bio||'';
+
+  // education
+  document.getElementById('education-block').innerHTML = (DATA.education||[]).map(e=>`
+    <div style="margin-bottom:1.5rem;padding:1rem;background:var(--bg-card);border-radius:var(--radius);border:1px solid var(--border2);">
+      <div style="font-family:var(--font-mono);font-size:.75rem;color:var(--accent);margin-bottom:.3rem;">${e.period}</div>
+      <div style="font-weight:600;margin-bottom:.2rem;">${e.institution}</div>
+      <div style="font-size:.9rem;color:var(--muted);margin-bottom:.5rem;">${e.degree} — ${e.grade}</div>
+      <div style="font-size:.8rem;color:var(--muted);"><strong style="color:var(--text);">Coursework:</strong> ${e.coursework}</div>
+    </div>`).join('');
+
+  // sidebar info
+  document.getElementById('about-info-block').innerHTML = `
+    <div style="font-family:var(--font-mono);font-size:.7rem;color:var(--accent);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.1em;">Quick Info</div>
+    ${infoRow('Email',`<a href="mailto:${c.email}">${c.email}</a>`)}
+    ${infoRow('Phone',c.phone)}
+    ${infoRow('Location',c.location)}
+    ${infoRow('LinkedIn',`<a href="${c.linkedin}" target="_blank">View Profile ↗</a>`)}
+    ${c.github ? infoRow('GitHub',`<a href="${c.github}" target="_blank">View Profile ↗</a>`) : ''}`;
+
+  // research
+  document.getElementById('research-timeline').innerHTML = (DATA.research||[]).map(r=>`
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">${r.period}</div>
+      <div class="timeline-title">${r.title}</div>
+      <div class="timeline-org">${r.org}</div>
+      ${r.focus?`<div class="timeline-focus">Focus: ${r.focus}</div>`:''}
+      <ul class="timeline-bullets">${(r.bullets||[]).map(b=>`<li>${b}</li>`).join('')}</ul>
+    </div>`).join('');
+
+  // projects
+  document.getElementById('projects-grid').innerHTML = (DATA.projects||[]).map(pr=>`
+    <div class="project-card">
+      <div class="project-img-wrap">
+        ${pr.image
+          ? `<img src="${pr.image}" alt="${esc(pr.name)}">`
+          : `<div class="project-img-placeholder">📡</div>`}
+      </div>
+      <div class="project-body">
+        <div class="project-name">${pr.name}</div>
+        <ul class="project-bullets">${(pr.bullets||[]).map(b=>`<li>${b}</li>`).join('')}</ul>
+      </div>
+    </div>`).join('');
+
+  // presentations
+  document.getElementById('presentations-list').innerHTML = (DATA.presentations||[]).map(pr=>`
+    <div class="pres-item">
+      <div class="pres-year">${pr.year}</div>
+      <div>
+        <div class="pres-venue">${pr.event}</div>
+        <div class="pres-title">${pr.title}</div>
+        ${pr.description?`<div class="pres-desc">${pr.description}</div>`:''}
+      </div>
+    </div>`).join('');
+
+  // skills
+  document.getElementById('skills-grid').innerHTML = (DATA.skills||[]).map(cat=>`
+    <div class="skill-cat">
+      <div class="skill-cat-name">${cat.name}</div>
+      <div class="skill-tags">${(cat.items||[]).map(i=>`<span class="skill-tag">${i}</span>`).join('')}</div>
+    </div>`).join('');
+
+  // achievements
+  document.getElementById('ach-grid').innerHTML = (DATA.achievements||[]).map(a=>`
+    <div class="ach-card"><div class="ach-title">${a.title}</div><div class="ach-meta">${a.period} · ${a.org}</div></div>`).join('');
+
+  // service
+  document.getElementById('service-list').innerHTML = (DATA.service||[]).map(s=>`
+    <div style="padding:.6rem 0;border-bottom:1px solid var(--border2);font-size:.9rem;color:var(--muted);">${s.text}</div>`).join('');
+
+  // contact
+  document.getElementById('contact-info-block').innerHTML = `
+    <h3 style="font-family:var(--font-serif);font-size:1.3rem;margin-bottom:1.25rem;">Let's Connect</h3>
+    ${infoRow('Email',`<a href="mailto:${c.email}" style="color:var(--accent)">${c.email}</a>`)}
+    ${infoRow('Phone',c.phone)}
+    ${infoRow('Location',c.location)}
+    ${c.linkedin?infoRow('LinkedIn',`<a href="${c.linkedin}" target="_blank" style="color:var(--accent)">View Profile ↗</a>`):''}
+    ${c.github?infoRow('GitHub',`<a href="${c.github}" target="_blank" style="color:var(--accent)">View Profile ↗</a>`):''}`;
+
+  // refs
+  document.getElementById('refs-block').innerHTML = (DATA.referees||[]).map(r=>`
+    <div class="ref-card">
+      <div class="ref-name">${r.name}</div>
+      <div class="ref-title">${r.title}</div>
+      <div class="ref-title" style="margin-bottom:.5rem;">${r.org}</div>
+      <div class="ref-contact">${r.phone} · <a href="mailto:${r.email}">${r.email}</a></div>
+    </div>`).join('');
+
+  document.getElementById('footer-text').textContent = DATA.footer||'';
+}
+
+function renderCvPills() {
+  const el = document.getElementById('cv-downloads-hero');
+  const files = DATA.cvFiles||[];
+  if (!files.length) { el.innerHTML=''; return; }
+  el.innerHTML = files.map((f,i)=>`
+    <a class="cv-dl-pill" href="${f.dataUrl}" download="${esc(f.label||f.name)}">
+      <span class="cv-icon">📄</span>${esc(f.label||f.name)}
+    </a>`).join('');
+}
+
+function infoRow(label,val) {
+  return `<div class="info-row"><span class="info-label">${label}</span><span class="info-val">${val}</span></div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// SECRET SEQUENCE  →  logo → about → papers → skills
+// ═══════════════════════════════════════════════════
+const SEQ = ['logo','about','papers','skills'];
+let seqPos = 0, seqTimer = null;
+const seqLabels = ['1/4 ✓','2/4 ✓','3/4 ✓','Opening…'];
+
+function seqClick(id) {
+  if (SEQ[seqPos] !== id) { resetSeq(); return; }
+  seqPos++;
+  showHint(seqLabels[seqPos-1]);
+  // flash logo
+  const logo = document.getElementById('nav-logo');
+  logo.classList.add('seq-pulse');
+  setTimeout(()=>logo.classList.remove('seq-pulse'), 400);
+
+  clearTimeout(seqTimer);
+  if (seqPos === SEQ.length) { setTimeout(openAdmin, 400); resetSeq(); return; }
+  seqTimer = setTimeout(resetSeq, 8000);
+}
+
+function resetSeq() {
+  seqPos = 0;
+  clearTimeout(seqTimer);
+  hideHint();
+}
+
+function showHint(msg) {
+  const h = document.getElementById('seq-hint');
+  h.textContent = msg;
+  h.classList.add('show');
+  clearTimeout(h._t);
+  h._t = setTimeout(()=>h.classList.remove('show'), 3500);
+}
+function hideHint() {
+  document.getElementById('seq-hint').classList.remove('show');
+}
+
+// ═══════════════════════════════════════════════════
+// ADMIN OPEN / CLOSE / LOGIN
+// ═══════════════════════════════════════════════════
+function openAdmin() {
+  document.getElementById('admin-overlay').classList.add('visible');
+  document.getElementById('admin-login').style.display = 'flex';
+  document.getElementById('admin-panel').style.display = 'none';
+  document.getElementById('admin-panel').classList.remove('visible');
+  document.getElementById('admin-pw-input').value = '';
+  document.getElementById('login-error').style.display = 'none';
+  setTimeout(()=>document.getElementById('admin-pw-input').focus(), 120);
+}
+function closeAdmin() {
+  document.getElementById('admin-overlay').classList.remove('visible');
+}
+function adminLogin() {
+  const pw = document.getElementById('admin-pw-input').value;
+  if (pw === DATA.adminPassword) {
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    document.getElementById('admin-panel').classList.add('visible');
+    populateAdmin();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+function switchTab(name, btn) {
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-panel').forEach(p=>p.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════
+// POPULATE ADMIN
+// ═══════════════════════════════════════════════════
+function populateAdmin() {
+  const p = DATA.profile, c = DATA.contact;
+  document.getElementById('a-name').value = p.name||'';
+  document.getElementById('a-hero-mono').value = p.heroMono||'';
+  document.getElementById('a-tagline').value = p.tagline||'';
+  document.getElementById('a-bio').value = p.bio||'';
+  document.getElementById('a-stats').value = [p.statsYears,p.statsProjects,p.statsPapers,p.statsAwards].join(', ');
+  document.getElementById('a-email').value = c.email||'';
+  document.getElementById('a-phone').value = c.phone||'';
+  document.getElementById('a-linkedin').value = c.linkedin||'';
+  document.getElementById('a-github').value = c.github||'';
+  document.getElementById('a-location').value = c.location||'';
+  document.getElementById('a-footer').value = DATA.footer||'';
+  renderAdminEducation();
+  renderAdminCvs();
+  renderAdminResearch();
+  renderAdminProjects();
+  renderAdminPresentations();
+  renderAdminSkills();
+  renderAdminAch();
+  renderAdminService();
+  renderAdminRefs();
+}
+
+// ── Education ──
+function renderAdminEducation() {
+  document.getElementById('a-education-list').innerHTML = (DATA.education||[]).map((e,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-label">Education ${i+1}</span><button class="admin-delete-btn" onclick="delEdu(${i})">Remove</button></div>
+      <div class="admin-two-col">
+        <div class="admin-row"><label class="admin-label">Institution</label><input class="admin-input" data-edu="${i}" data-field="institution" value="${esc(e.institution)}"></div>
+        <div class="admin-row"><label class="admin-label">Period</label><input class="admin-input" data-edu="${i}" data-field="period" value="${esc(e.period)}"></div>
+      </div>
+      <div class="admin-two-col">
+        <div class="admin-row"><label class="admin-label">Degree</label><input class="admin-input" data-edu="${i}" data-field="degree" value="${esc(e.degree)}"></div>
+        <div class="admin-row"><label class="admin-label">Grade / Result</label><input class="admin-input" data-edu="${i}" data-field="grade" value="${esc(e.grade)}"></div>
+      </div>
+      <div class="admin-row"><label class="admin-label">Coursework (comma-separated)</label><textarea class="admin-textarea" data-edu="${i}" data-field="coursework" rows="2">${esc(e.coursework)}</textarea></div>
+    </div>`).join('');
+}
+function addEducation() { DATA.education.push({institution:'',degree:'',period:'',grade:'',coursework:''}); renderAdminEducation(); }
+function delEdu(i) { DATA.education.splice(i,1); renderAdminEducation(); }
+
+// ── CVs ──
+function renderAdminCvs() {
+  const files = DATA.cvFiles||[];
+  document.getElementById('a-cvs-list').innerHTML = files.length ? files.map((f,i)=>`
+    <div class="cv-admin-item">
+      <div class="cv-icon">📄</div>
+      <div class="cv-info">
+        <input class="cv-name-input" data-cv-label="${i}" value="${esc(f.label||f.name)}" placeholder="Label for this CV">
+        <div class="cv-file-meta">${f.name} · ${Math.round(f.size/1024)} KB</div>
+      </div>
+      <button class="admin-delete-btn" onclick="delCv(${i})">Remove</button>
+    </div>`).join('')
+  : '<p style="font-size:.85rem;color:var(--muted);padding:.5rem 0;">No CV files uploaded yet.</p>';
+}
+
+function handleCvUpload(input) {
+  const files = Array.from(input.files);
+  let loaded = 0;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      if (!DATA.cvFiles) DATA.cvFiles = [];
+      DATA.cvFiles.push({ name: file.name, label: file.name.replace(/\.[^.]+$/,''), dataUrl: e.target.result, fileType: file.type, size: file.size });
+      loaded++;
+      if (loaded === files.length) { renderAdminCvs(); showToast(`${files.length} CV file${files.length>1?'s':''} added!`); }
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
+}
+function delCv(i) { DATA.cvFiles.splice(i,1); renderAdminCvs(); renderCvPills(); }
+
+// ── Research ──
+function renderAdminResearch() {
+  document.getElementById('a-research-list').innerHTML = (DATA.research||[]).map((r,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-label">${r.title||'Item '+(i+1)}</span><button class="admin-delete-btn" onclick="delResearch(${i})">Remove</button></div>
+      <div class="admin-two-col">
+        <div class="admin-row"><label class="admin-label">Title / Role</label><input class="admin-input" data-res="${i}" data-field="title" value="${esc(r.title)}"></div>
+        <div class="admin-row"><label class="admin-label">Organisation</label><input class="admin-input" data-res="${i}" data-field="org" value="${esc(r.org)}"></div>
+      </div>
+      <div class="admin-two-col">
+        <div class="admin-row"><label class="admin-label">Period</label><input class="admin-input" data-res="${i}" data-field="period" value="${esc(r.period)}"></div>
+        <div class="admin-row"><label class="admin-label">Research Focus</label><input class="admin-input" data-res="${i}" data-field="focus" value="${esc(r.focus)}"></div>
+      </div>
+      <div class="admin-row"><label class="admin-label">Bullet Points</label>
+        <div id="res-bullets-${i}">${(r.bullets||[]).map((b,j)=>`
+          <div class="bullet-row"><input class="admin-input" data-res="${i}" data-bi="${j}" value="${esc(b)}"><button class="bullet-del-btn" onclick="delBullet('res',${i},${j})">✕</button></div>`).join('')}
+        </div>
+        <button class="bullet-add-btn" onclick="addBullet('res',${i})">+ Add bullet</button>
+      </div>
+    </div>`).join('');
+}
+function addResearch() { DATA.research.push({title:'',org:'',period:'',focus:'',bullets:['']}); renderAdminResearch(); }
+function delResearch(i) { DATA.research.splice(i,1); renderAdminResearch(); }
+
+// ── Projects ──
+function renderAdminProjects() {
+  document.getElementById('a-projects-list').innerHTML = (DATA.projects||[]).map((pr,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-label">${pr.name||'Project '+(i+1)}</span><button class="admin-delete-btn" onclick="delProject(${i})">Remove</button></div>
+      <div class="admin-two-col">
+        <div>
+          <div class="admin-row"><label class="admin-label">Project Name</label><input class="admin-input" data-proj="${i}" data-field="name" value="${esc(pr.name)}"></div>
+          <div class="admin-row"><label class="admin-label">Cover Image</label>
+            <div class="img-upload-zone" id="proj-img-zone-${i}">
+              <input type="file" accept="image/*" onchange="handleProjectImg(${i}, this)">
+              <div class="upload-label">${pr.image ? '🖼 Click to replace image' : '📷 Click to upload cover image'}</div>
+            </div>
+            ${pr.image ? `<div class="img-preview-wrap"><img src="${pr.image}" id="proj-img-prev-${i}"><button class="img-remove-btn" onclick="removeProjectImg(${i})">✕ Remove image</button></div>` : `<div id="proj-img-prev-${i}"></div>`}
+          </div>
+        </div>
+        <div class="admin-row"><label class="admin-label">Bullet Points</label>
+          <div id="proj-bullets-${i}">${(pr.bullets||[]).map((b,j)=>`
+            <div class="bullet-row"><input class="admin-input" data-proj="${i}" data-bi="${j}" value="${esc(b)}"><button class="bullet-del-btn" onclick="delBullet('proj',${i},${j})">✕</button></div>`).join('')}
+          </div>
+          <button class="bullet-add-btn" onclick="addBullet('proj',${i})">+ Add bullet</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function addProject() { DATA.projects.push({name:'',image:'',bullets:['']}); renderAdminProjects(); }
+function delProject(i) { DATA.projects.splice(i,1); renderAdminProjects(); }
+function handleProjectImg(i, input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    DATA.projects[i].image = e.target.result;
+    renderAdminProjects();
+    showToast('Image uploaded!');
+  };
+  reader.readAsDataURL(file);
+}
+function removeProjectImg(i) { DATA.projects[i].image = ''; renderAdminProjects(); }
+
+// ── Presentations ──
+function renderAdminPresentations() {
+  document.getElementById('a-pres-list').innerHTML = (DATA.presentations||[]).map((pr,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-label">${pr.title||'Presentation '+(i+1)}</span><button class="admin-delete-btn" onclick="delPres(${i})">Remove</button></div>
+      <div class="admin-three-col">
+        <div class="admin-row"><label class="admin-label">Event Name</label><input class="admin-input" data-pres="${i}" data-field="event" value="${esc(pr.event)}"></div>
+        <div class="admin-row"><label class="admin-label">Year</label><input class="admin-input" data-pres="${i}" data-field="year" value="${esc(pr.year)}"></div>
+        <div class="admin-row"><label class="admin-label">Paper / Talk Title</label><input class="admin-input" data-pres="${i}" data-field="title" value="${esc(pr.title)}"></div>
+      </div>
+      <div class="admin-row"><label class="admin-label">Description</label><input class="admin-input" data-pres="${i}" data-field="description" value="${esc(pr.description)}"></div>
+    </div>`).join('');
+}
+function addPresentation() { DATA.presentations.push({event:'',year:'',title:'',description:''}); renderAdminPresentations(); }
+function delPres(i) { DATA.presentations.splice(i,1); renderAdminPresentations(); }
+
+// ── Skills ──
+function renderAdminSkills() {
+  document.getElementById('a-skills-list').innerHTML = (DATA.skills||[]).map((s,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-label">${s.name||'Category '+(i+1)}</span><button class="admin-delete-btn" onclick="delSkillCat(${i})">Remove</button></div>
+      <div class="admin-two-col">
+        <div class="admin-row"><label class="admin-label">Category Name</label><input class="admin-input" data-skill="${i}" data-field="name" value="${esc(s.name)}"></div>
+        <div class="admin-row"><label class="admin-label">Skills (comma-separated)</label><input class="admin-input" data-skill="${i}" data-field="items" value="${esc((s.items||[]).join(', '))}"></div>
+      </div>
+    </div>`).join('');
+}
+function addSkillCat() { DATA.skills.push({name:'',items:[]}); renderAdminSkills(); }
+function delSkillCat(i) { DATA.skills.splice(i,1); renderAdminSkills(); }
+
+// ── Achievements ──
+function renderAdminAch() {
+  document.getElementById('a-ach-list').innerHTML = (DATA.achievements||[]).map((a,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-label">Achievement ${i+1}</span><button class="admin-delete-btn" onclick="delAch(${i})">Remove</button></div>
+      <div class="admin-three-col">
+        <div class="admin-row"><label class="admin-label">Title</label><input class="admin-input" data-ach="${i}" data-field="title" value="${esc(a.title)}"></div>
+        <div class="admin-row"><label class="admin-label">Period / Date</label><input class="admin-input" data-ach="${i}" data-field="period" value="${esc(a.period)}"></div>
+        <div class="admin-row"><label class="admin-label">Organisation</label><input class="admin-input" data-ach="${i}" data-field="org" value="${esc(a.org)}"></div>
+      </div>
+    </div>`).join('');
+}
+function addAch() { DATA.achievements.push({title:'',period:'',org:''}); renderAdminAch(); }
+function delAch(i) { DATA.achievements.splice(i,1); renderAdminAch(); }
+
+// ── Service ──
+function renderAdminService() {
+  document.getElementById('a-service-list').innerHTML = (DATA.service||[]).map((s,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-label">Service Item ${i+1}</span><button class="admin-delete-btn" onclick="delService(${i})">Remove</button></div>
+      <div class="admin-row"><input class="admin-input" data-svc="${i}" value="${esc(s.text)}"></div>
+    </div>`).join('');
+}
+function addService() { DATA.service.push({text:''}); renderAdminService(); }
+function delService(i) { DATA.service.splice(i,1); renderAdminService(); }
+
+// ── Referees ──
+function renderAdminRefs() {
+  document.getElementById('a-refs-list').innerHTML = (DATA.referees||[]).map((r,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-label">${r.name||'Referee '+(i+1)}</span><button class="admin-delete-btn" onclick="delRef(${i})">Remove</button></div>
+      <div class="admin-two-col">
+        <div class="admin-row"><label class="admin-label">Name</label><input class="admin-input" data-ref="${i}" data-field="name" value="${esc(r.name)}"></div>
+        <div class="admin-row"><label class="admin-label">Title</label><input class="admin-input" data-ref="${i}" data-field="title" value="${esc(r.title)}"></div>
+      </div>
+      <div class="admin-three-col">
+        <div class="admin-row"><label class="admin-label">Organisation</label><input class="admin-input" data-ref="${i}" data-field="org" value="${esc(r.org)}"></div>
+        <div class="admin-row"><label class="admin-label">Phone</label><input class="admin-input" data-ref="${i}" data-field="phone" value="${esc(r.phone)}"></div>
+        <div class="admin-row"><label class="admin-label">Email</label><input class="admin-input" data-ref="${i}" data-field="email" value="${esc(r.email)}"></div>
+      </div>
+    </div>`).join('');
+}
+function addRef() { DATA.referees.push({name:'',title:'',org:'',phone:'',email:''}); renderAdminRefs(); }
+function delRef(i) { DATA.referees.splice(i,1); renderAdminRefs(); }
+
+// ── Bullets ──
+function addBullet(type, i) {
+  if (type==='res') { DATA.research[i].bullets.push(''); renderAdminResearch(); }
+  else if (type==='proj') { DATA.projects[i].bullets.push(''); renderAdminProjects(); }
+}
+function delBullet(type, i, j) {
+  if (type==='res') { DATA.research[i].bullets.splice(j,1); renderAdminResearch(); }
+  else if (type==='proj') { DATA.projects[i].bullets.splice(j,1); renderAdminProjects(); }
+}
+
+// ═══════════════════════════════════════════════════
+// SAVE ALL
+// ═══════════════════════════════════════════════════
+function collectAdminData() {
+  const p = DATA.profile, c = DATA.contact;
+  p.name = document.getElementById('a-name').value;
+  p.heroMono = document.getElementById('a-hero-mono').value;
+  p.tagline = document.getElementById('a-tagline').value;
+  p.bio = document.getElementById('a-bio').value;
+  const stats = document.getElementById('a-stats').value.split(',').map(s=>s.trim());
+  p.statsYears=stats[0]||''; p.statsProjects=stats[1]||''; p.statsPapers=stats[2]||''; p.statsAwards=stats[3]||'';
+  c.email=document.getElementById('a-email').value;
+  c.phone=document.getElementById('a-phone').value;
+  c.linkedin=document.getElementById('a-linkedin').value;
+  c.github=document.getElementById('a-github').value;
+  c.location=document.getElementById('a-location').value;
+  DATA.footer=document.getElementById('a-footer').value;
+
+  document.querySelectorAll('[data-edu]').forEach(el=>{const i=+el.dataset.edu,f=el.dataset.field;if(DATA.education[i])DATA.education[i][f]=el.value;});
+  document.querySelectorAll('[data-res]').forEach(el=>{const i=+el.dataset.res,f=el.dataset.field,bi=el.dataset.bi;if(DATA.research[i]){if(f)DATA.research[i][f]=el.value;else if(bi!==undefined)DATA.research[i].bullets[+bi]=el.value;}});
+  document.querySelectorAll('[data-proj]').forEach(el=>{const i=+el.dataset.proj,f=el.dataset.field,bi=el.dataset.bi;if(DATA.projects[i]){if(f)DATA.projects[i][f]=el.value;else if(bi!==undefined)DATA.projects[i].bullets[+bi]=el.value;}});
+  document.querySelectorAll('[data-pres]').forEach(el=>{const i=+el.dataset.pres,f=el.dataset.field;if(DATA.presentations[i]&&f)DATA.presentations[i][f]=el.value;});
+  document.querySelectorAll('[data-skill]').forEach(el=>{const i=+el.dataset.skill,f=el.dataset.field;if(DATA.skills[i]){if(f==='items')DATA.skills[i].items=el.value.split(',').map(s=>s.trim()).filter(Boolean);else DATA.skills[i][f]=el.value;}});
+  document.querySelectorAll('[data-ach]').forEach(el=>{const i=+el.dataset.ach,f=el.dataset.field;if(DATA.achievements[i]&&f)DATA.achievements[i][f]=el.value;});
+  document.querySelectorAll('[data-svc]').forEach(el=>{const i=+el.dataset.svc;if(DATA.service[i])DATA.service[i].text=el.value;});
+  document.querySelectorAll('[data-ref]').forEach(el=>{const i=+el.dataset.ref,f=el.dataset.field;if(DATA.referees[i]&&f)DATA.referees[i][f]=el.value;});
+  // CV labels
+  document.querySelectorAll('[data-cv-label]').forEach(el=>{const i=+el.dataset.cvLabel;if(DATA.cvFiles[i])DATA.cvFiles[i].label=el.value;});
+}
+
+function saveAll() {
+  collectAdminData();
+  saveData(DATA);
+  renderPortfolio();
+  showToast('Changes saved!');
+}
+
+function changePassword() {
+  const old=document.getElementById('s-old-pw').value;
+  const nw=document.getElementById('s-new-pw').value;
+  const cf=document.getElementById('s-confirm-pw').value;
+  const msg=document.getElementById('pw-msg');
+  if(old!==DATA.adminPassword){msg.style.display='block';msg.style.color='#e25555';msg.textContent='Current password incorrect';return;}
+  if(nw.length<6){msg.style.display='block';msg.style.color='#e25555';msg.textContent='Password must be at least 6 characters';return;}
+  if(nw!==cf){msg.style.display='block';msg.style.color='#e25555';msg.textContent='Passwords do not match';return;}
+  DATA.adminPassword=nw; saveData(DATA);
+  msg.style.display='block';msg.style.color='var(--accent)';msg.textContent='Password updated!';
+  document.getElementById('s-old-pw').value='';document.getElementById('s-new-pw').value='';document.getElementById('s-confirm-pw').value='';
+}
+
+// ═══════════════════════════════════════════════════
+// AUTO CV PDF GENERATOR (html2pdf)
+// ═══════════════════════════════════════════════════
+function buildCVHtml() {
+  const p=DATA.profile, c=DATA.contact;
+  let h = `
+    <h1 class="cv-name">${(p.name||'').replace('\n',' ')}</h1>
+    <p class="cv-contact">${c.email} | ${c.phone} | ${(c.linkedin||'').replace(/https?:\/\//,'')} | ${c.location}</p>`;
+
+  h += `<div class="cv-section-head">Profile</div>`;
+  h += `<p class="cv-body-para">${(p.bio||'').replace(/\n\n/g,'</p><p class="cv-body-para">').replace(/\n/g,' ')}</p>`;
+
+  if (DATA.education?.length) {
+    h += `<div class="cv-section-head">Education</div>`;
+    DATA.education.forEach(e=>{
+      h += `<div class="cv-entry-row"><span class="cv-entry-title">${e.institution}</span><span class="cv-entry-date">${e.period}</span></div>`;
+      h += `<div class="cv-entry-sub">${e.degree}</div>`;
+      h += `<p class="cv-body-para"><strong>Grade:</strong> ${e.grade}</p>`;
+      if(e.coursework) h += `<p class="cv-body-para"><strong>Relevant Coursework:</strong> ${e.coursework}</p>`;
+    });
+  }
+  if (DATA.research?.length) {
+    h += `<div class="cv-section-head">Research Experience</div>`;
+    DATA.research.forEach(r=>{
+      h += `<div class="cv-entry-row"><span class="cv-entry-title">${r.title}</span><span class="cv-entry-date">${r.period}</span></div>`;
+      h += `<div class="cv-entry-sub">${r.org}</div>`;
+      if(r.focus) h += `<p class="cv-focus"><strong>Research focus:</strong> ${r.focus}</p>`;
+      if(r.bullets?.length) h += `<ul class="cv-bullets">${r.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>`;
+    });
+  }
+  if (DATA.presentations?.length) {
+    h += `<div class="cv-section-head">Presentations</div>`;
+    DATA.presentations.forEach(pr=>{
+      h += `<div class="cv-pres-item"><span class="cv-pres-venue">${pr.event} (${pr.year})</span></div>`;
+      h += `<div class="cv-pres-item" style="padding-left:10pt;">Presented: "<em>${pr.title}</em>"</div>`;
+      if(pr.description) h += `<div class="cv-pres-item" style="padding-left:10pt;">– ${pr.description}</div>`;
+    });
+  }
+  if (DATA.projects?.length) {
+    h += `<div class="cv-section-head">Projects</div>`;
+    DATA.projects.forEach(pr=>{
+      h += `<div class="cv-entry-row"><span class="cv-entry-title">${pr.name}</span></div>`;
+      if(pr.bullets?.length) h += `<ul class="cv-bullets">${pr.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>`;
+    });
+  }
+  if (DATA.achievements?.length) {
+    h += `<div class="cv-section-head">Achievements / Awards</div>`;
+    DATA.achievements.forEach(a=>{
+      h += `<div class="cv-ach-row"><span class="cv-entry-title">${a.title}</span><span class="cv-entry-date">${a.period}</span></div>`;
+      h += `<div class="cv-entry-sub">${a.org}</div>`;
+    });
+  }
+  if (DATA.service?.length) {
+    h += `<div class="cv-section-head">Academic &amp; Professional Service</div>`;
+    DATA.service.forEach(s=>{ h += `<div class="cv-service-item">• ${s.text}</div>`; });
+  }
+  if (DATA.skills?.length) {
+    h += `<div class="cv-section-head">Relevant Research Skills</div>`;
+    DATA.skills.forEach(s=>{ h += `<div class="cv-skill-row"><strong>${s.name}:</strong> ${(s.items||[]).join(', ')}</div>`; });
+  }
+  if (DATA.referees?.length) {
+    h += `<div class="cv-section-head">Referee</div><div class="cv-refs-grid">`;
+    DATA.referees.forEach(r=>{ h += `<div class="cv-ref-block"><div class="cv-ref-name">${r.name}</div><div>${r.title}</div><div>${r.org}</div><div>Phone: ${r.phone}</div><div>Email: ${r.email}</div></div>`; });
+    h += `</div>`;
+  }
+  return h;
+}
+
+function downloadAutoCV() {
+  const btn = document.getElementById('dl-cv-btn');
+  btn.textContent = '⏳ Building…'; btn.disabled = true;
+  const el = document.getElementById('cv-print');
+  el.innerHTML = buildCVHtml();
+  el.style.display = 'block';
+  const name = (DATA.profile.name||'CV').replace('\n',' ').replace(/\s+/g,'_');
+  html2pdf().set({
+    margin:0, filename:`${name}_CV.pdf`,
+    image:{type:'jpeg',quality:.98},
+    html2canvas:{scale:2,useCORS:true,letterRendering:true},
+    jsPDF:{unit:'pt',format:'letter',orientation:'portrait'},
+    pagebreak:{mode:['avoid-all','css','legacy']}
+  }).from(el).save().then(()=>{
+    el.style.display='none';
+    btn.textContent='⬇ Auto CV PDF'; btn.disabled=false;
+    showToast('CV downloaded!');
+  }).catch(()=>{ el.style.display='none'; btn.textContent='⬇ Auto CV PDF'; btn.disabled=false; });
+}
+
+// ═══════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════
+function showToast(msg) {
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// Scroll fade-ins
+function initAnimations() {
+  const obs = new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+}
+
+// Ctrl+Shift+A fallback for development
+document.addEventListener('keydown', e=>{ if(e.ctrlKey&&e.shiftKey&&e.key==='A') openAdmin(); });
+
+// Init
+document.addEventListener('DOMContentLoaded', ()=>{ renderPortfolio(); initAnimations(); });
+</script>
+</body>
+</html>
