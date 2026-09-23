@@ -282,6 +282,8 @@ footer{text-align:center;padding:2rem 5vw 4rem;border-top:1px solid var(--border
         <a href="#research" class="btn btn-primary">View Research</a>
         <button class="btn btn-outline" onclick="downloadAutoCV()" id="dl-cv-btn">⬇ Auto CV PDF</button>
         <a id="hero-linkedin" href="#" class="btn btn-outline" target="_blank">LinkedIn ↗</a>
+        <a id="hero-github" href="#" class="btn btn-outline" target="_blank">GitHub ↗</a>
+        <a id="hero-hackster" href="#" class="btn btn-outline" target="_blank">Hackster.io ↗</a>
         <a id="hero-email-btn" href="#" class="btn btn-outline">Email</a>
       </div>
       <div class="cv-downloads" id="cv-downloads-hero"></div>
@@ -506,6 +508,9 @@ footer{text-align:center;padding:2rem 5vw 4rem;border-top:1px solid var(--border
             <div class="admin-row"><label class="admin-label">LinkedIn URL</label><input class="admin-input" id="a-linkedin" type="text"></div>
             <div class="admin-row"><label class="admin-label">GitHub URL (optional)</label><input class="admin-input" id="a-github" type="text"></div>
           </div>
+          <div class="admin-two-col">
+            <div class="admin-row"><label class="admin-label">Hackster.io URL (optional)</label><input class="admin-input" id="a-hackster" type="text"></div>
+          </div>
           <div class="admin-row"><label class="admin-label">Location</label><input class="admin-input" id="a-location" type="text"></div>
         </div>
         <div class="admin-section">
@@ -561,12 +566,12 @@ const DEFAULT_DATA = {
     name: "Sewornu Calvin\nKofi Mawulorm",
     heroMono: "// telecommunications engineer & researcher",
     tagline: "Telecommunications Engineering graduate specialising in antenna design, embedded sensing systems, and wireless communication architectures. Research Assistant at KNUST's AT Labs.",
-    statsYears:"3+", statsProjects:"6+", statsPapers:"1", statsAwards:"2",
+    statsYears:"3+", statsProjects:"9+", statsPapers:"1", statsAwards:"2",
     bio: "A motivated and passionate Telecommunications Engineering graduate with research experience in embedded sensing systems, wearable assistive technologies, and low-power wireless communication architectures. My work focuses on the design and prototyping of intelligent sensor-driven systems, integrating embedded hardware, wireless networking, and edge computing for human-interactive and cyber-physical applications.\n\nI am particularly interested in intelligent sensing systems, embedded AI platforms, wireless sensor networks, and experimentally driven system design. I seek to contribute to research in smart sensing and autonomous embedded systems. I have experience in physical and theoretical research, research paper construction, and presenting at symposiums."
   },
   contact: {
     email:"calvinsewornu123@gmail.com", phone:"+233 552 310 269",
-    linkedin:"https://www.linkedin.com/in/sewornu-calvin", github:"", location:"Kumasi, Ghana"
+    linkedin:"https://www.linkedin.com/in/sewornu-calvin", github:"https://github.com/shadowlessblu", hackster:"https://www.hackster.io/calvinsewornu123", location:"Kumasi, Ghana"
   },
   footer: "© 2025 Calvin Sewornu. All rights reserved.",
   education: [{
@@ -577,12 +582,18 @@ const DEFAULT_DATA = {
   }],
   research: [
     { title:"Research Assistant", org:"Quantum Computing & Assistive Technology Lab, KNUST", period:"Oct 2025 – Present", focus:"Edge-AI wearable systems and intelligent sensing platforms", bullets:["Supporting hardware–software co-design for intelligent wearable systems, including sensor integration, embedded firmware development, and wireless communication architecture.","Assisting with experimental setup, data analysis, and documentation for ongoing lab research.","Data analysis and system integration using Python and embedded platforms."] },
+    { title:"Robotics Academy (JdeRobot)", org:"Self-directed training", period:"2026", focus:"ROS and Gazebo-based robotics simulation and perception", bullets:["Completed practical robotics exercises in mobile robotics, autonomous driving, and computer-vision-based perception using ROS and the Gazebo simulator.","Worked with ROS sensor and actuator interfaces (HAL/WebGUI modules) for robot control and perception tasks in simulation."] },
     { title:"Design and Optimization of a Circular Tri-Band CPW Antenna", org:"Undergraduate Research, KNUST", period:"Jan 2025 – Aug 2025", focus:"Antenna design & EM simulation", bullets:["Designed and optimized a compact tri-band CPW antenna for multiband wireless applications.","Performed parametric optimization and full-wave EM simulations to improve impedance matching and radiation characteristics.","Evaluated antenna performance across multiple frequency bands using ANSYS HFSS and CST Studio Suite."] },
     { title:"Robotics Research Intern", org:"The Makersplace", period:"Sept 2023 – Nov 2023 · Oct 2024 – Nov 2024", focus:"Robotics, embedded systems & sensor integration", bullets:["Assisted in the instruction of robotics and embedded systems courses.","Integrated sensors for robotic platforms and supported hands-on project development.","Prepared documentation and demonstrations for robotics tutorials and competitions."] },
     { title:"ALX Software Engineering", org:"African Leadership Experience", period:"Aug 2023 – Oct 2024", focus:"Back-end engineering & system architecture", bullets:["Completed a one-year intensive software engineering program with foundational training in programming, algorithms, data structures, and collaborative development.","Specialisation in back-end engineering: server-side development, databases, APIs, and scalable system architecture."] },
     { title:"Certified Ethical Hacker Training", org:"Educ8africa", period:"May 2024 – Jan 2025", focus:"Cybersecurity & penetration testing", bullets:["Practical training in network security, vulnerability assessment, penetration testing methodologies, cryptography, and system defense.","Preparing for the Certified Ethical Hacker (CEH) certification."] }
   ],
   projects: [
+    { name:"SSLAM: Computer Vision Gesture Human Interface Device", image:"", bullets:["Built a real-time, AI-powered hand-tracking system on the Arduino UNO Q using Arduino App Lab.","Translated live hand gestures into real mouse and keyboard input for a computer.","Designed as an assistive human interface device for users who find conventional keyboards, mice, or touchscreens difficult to use.","Project write-up: <a href=\"https://www.hackster.io/calvinsewornu123/sslam-computer-vision-gesture-human-interface-device-a6e498\" target=\"_blank\">hackster.io ↗</a> · Code: <a href=\"https://github.com/shadowlessblu/sslam-hand-tracking\" target=\"_blank\">GitHub ↗</a>"] },
+    { name:"Robot Eyes: Animated Eyes on Raspberry Pi", image:"", bullets:["Developed a lightweight robot face engine with smooth, expressive eye animations for human–robot interaction.","Implemented on a Raspberry Pi driving a 1.8\" ST7735 TFT display.","Built reusable animation primitives for giving embedded/robotic devices an expressive, readable presence.","Project write-up: <a href=\"https://www.hackster.io/calvinsewornu123/robot-eyes-smooth-animated-eyes-on-raspberry-pi-9deff6\" target=\"_blank\">hackster.io ↗</a>"] },
+    { name:"Smart Biometric Vault (Edge-AI Face Recognition Security System)", image:"", bullets:["Built an edge-AI security system on the Arduino UNO Q combining facial recognition (DeepFace/Facenet512, MediaPipe) with physical lock control.","Implemented zero-spoof face authentication with liveness detection, running entirely on-device with no cloud connectivity.","Dynamic per-user security thresholds and admin-only access control.","Code: <a href=\"https://github.com/shadowlessblu/Smart-Biometric-Vault-using-Face-Recognition\" target=\"_blank\">GitHub ↗</a>"] },
+    { name:"AgriGuard EQ", image:"", bullets:["Bluetooth Mesh network of nRF54LM20 guardian nodes that predict pump, valve, and sensor failure in irrigation and greenhouse systems before it happens, from vibration and current signatures.","On-device health-score model (Neuton on Cortex-M33, or the Axon NPU) so fault detection needs no cloud round-trip — built for solar-powered nodes unattended in the field.","Status: work in progress. Project write-up: <a href=\"https://www.hackster.io/calvinsewornu123/agriguard-eq-15f7b0\" target=\"_blank\">hackster.io ↗</a>"] },
+    { name:"Arduino UNO Qt BADGEr", image:"", bullets:["Two-tier event badge network on the Arduino UNO Q: ESP32-S3 wearer badges mesh over ESP-NOW and report to a UNO Q hub, which replies with spoken AI feedback.","Everything delivered as audio and haptic cues rather than a screen — built out of KNUST Assistive Technology Lab work, for wearers who can't read a display mid-conversation.","Status: work in progress. Project write-up: <a href=\"https://www.hackster.io/calvinsewornu123/arduino-uno-qt-badger-3d3bb0\" target=\"_blank\">hackster.io ↗</a>"] },
     { name:"ESP8266 IoT Smartwatch", image:"", bullets:["Developed an IoT smartwatch using ESP8266 and ESP-NOW for low-power wireless communication.","Designed an intuitive OLED user interface with button-based navigation.","Linked the device to a multi-node ESP network, enabling continuous monitoring and real-time visualization of sensor data."] },
     { name:"Smart Braille Glove Assistive Wearable Device", image:"", bullets:["Developed a Braille sensing matrix using switch arrays to simulate tactile detection.","Embedded processing of detected patterns for symbol recognition.","Integration of machine learning models for Braille character classification."] },
     { name:"CropTimize Wireless Agritech Network", image:"", bullets:["Designed distributed sensor nodes for environmental data acquisition using ESP32 and ESP8266.","Developed real-time data visualization and analytics pipelines.","Applied ML-assisted analysis for decision support in irrigation and pest control."] },
@@ -644,6 +655,10 @@ function renderPortfolio() {
   nameEl.innerHTML = parts.length>1 ? `${parts[0]} <span>${parts[1]}</span>` : `<span>${p.name}</span>`;
   document.getElementById('hero-tagline').textContent = p.tagline||'';
   document.getElementById('hero-linkedin').href = c.linkedin||'#';
+  document.getElementById('hero-github').href = c.github||'#';
+  document.getElementById('hero-github').style.display = c.github ? '' : 'none';
+  document.getElementById('hero-hackster').href = c.hackster||'#';
+  document.getElementById('hero-hackster').style.display = c.hackster ? '' : 'none';
   document.getElementById('hero-email-btn').href = 'mailto:'+(c.email||'');
   document.getElementById('stat-years').textContent = p.statsYears||'';
   document.getElementById('stat-projects').textContent = p.statsProjects||'';
@@ -672,7 +687,8 @@ function renderPortfolio() {
     ${infoRow('Phone',c.phone)}
     ${infoRow('Location',c.location)}
     ${infoRow('LinkedIn',`<a href="${c.linkedin}" target="_blank">View Profile ↗</a>`)}
-    ${c.github ? infoRow('GitHub',`<a href="${c.github}" target="_blank">View Profile ↗</a>`) : ''}`;
+    ${c.github ? infoRow('GitHub',`<a href="${c.github}" target="_blank">View Profile ↗</a>`) : ''}
+    ${c.hackster ? infoRow('Hackster.io',`<a href="${c.hackster}" target="_blank">View Profile ↗</a>`) : ''}`;
 
   // research
   document.getElementById('research-timeline').innerHTML = (DATA.research||[]).map(r=>`
@@ -732,7 +748,8 @@ function renderPortfolio() {
     ${infoRow('Phone',c.phone)}
     ${infoRow('Location',c.location)}
     ${c.linkedin?infoRow('LinkedIn',`<a href="${c.linkedin}" target="_blank" style="color:var(--accent)">View Profile ↗</a>`):''}
-    ${c.github?infoRow('GitHub',`<a href="${c.github}" target="_blank" style="color:var(--accent)">View Profile ↗</a>`):''}`;
+    ${c.github?infoRow('GitHub',`<a href="${c.github}" target="_blank" style="color:var(--accent)">View Profile ↗</a>`):''}
+    ${c.hackster?infoRow('Hackster.io',`<a href="${c.hackster}" target="_blank" style="color:var(--accent)">View Profile ↗</a>`):''}`;
 
   // refs
   document.getElementById('refs-block').innerHTML = (DATA.referees||[]).map(r=>`
@@ -845,6 +862,7 @@ function populateAdmin() {
   document.getElementById('a-phone').value = c.phone||'';
   document.getElementById('a-linkedin').value = c.linkedin||'';
   document.getElementById('a-github').value = c.github||'';
+  document.getElementById('a-hackster').value = c.hackster||'';
   document.getElementById('a-location').value = c.location||'';
   document.getElementById('a-footer').value = DATA.footer||'';
   renderAdminEducation();
@@ -1072,6 +1090,7 @@ function collectAdminData() {
   c.phone=document.getElementById('a-phone').value;
   c.linkedin=document.getElementById('a-linkedin').value;
   c.github=document.getElementById('a-github').value;
+  c.hackster=document.getElementById('a-hackster').value;
   c.location=document.getElementById('a-location').value;
   DATA.footer=document.getElementById('a-footer').value;
 
